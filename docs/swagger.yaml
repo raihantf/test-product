@@ -1,0 +1,87 @@
+basePath: /
+definitions:
+  request.AddProductRequest:
+    properties:
+      category_id:
+        type: integer
+      description:
+        type: string
+      product_name:
+        type: string
+    type: object
+  request.GetListRequest:
+    properties:
+      category_id:
+        type: integer
+      keyword:
+        type: string
+    type: object
+  response.Products:
+    properties:
+      category_id:
+        type: integer
+      description:
+        type: string
+      id:
+        type: integer
+      product_name:
+        type: string
+    type: object
+host: localhost:3000
+info:
+  contact:
+    email: fiber@swagger.io
+    name: API Support
+  description: This is a sample swagger for Fiber
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  termsOfService: http://swagger.io/terms/
+  title: TEST PRODUCT API
+  version: "1.0"
+paths:
+  /product:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: Payload Body [RAW]
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/request.AddProductRequest'
+      responses:
+        "200":
+          description: 'message": "Sucessfully Add New Product'
+          schema:
+            type: string
+        "400":
+          description: Bad Request
+      summary: Add Product
+      tags:
+      - Product
+  /product-list:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: Payload Body [RAW]
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/request.GetListRequest'
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/response.Products'
+            type: array
+        "400":
+          description: Bad Request
+      summary: Get List Product
+      tags:
+      - Product
+swagger: "2.0"
